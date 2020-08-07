@@ -69,6 +69,6 @@ class OrdenTrabajosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def orden_trabajo_params
-      params.require(:orden_trabajo).permit(:cliente, :producto, :post)
+      params.require(:orden_trabajo).permit(:cliente, :producto, :post => [])
     end
 end

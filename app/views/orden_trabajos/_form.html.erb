@@ -1,32 +1,23 @@
-<%= form_with(model: orden_trabajo, local: true) do |form| %>
-  <% if orden_trabajo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(orden_trabajo.errors.count, "error") %> prohibited this orden_trabajo from being saved:</h2>
 
-      <ul>
-        <% orden_trabajo.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= simple_form_for (@orden_trabajo) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="field">
+    <%= f.input :cliente %>
+    <%= f.input :producto%>
+<%= f.select(:post, [['Binder', 'Binder'],
+                                  ['Laminado', 'Laminado'],
+                                  ['BuV', 'BuV'],
+                                  ['Guillotina', 'Guillotina'],
+                                  ['Renz', 'Renz']
+                                 ],{ :prompt => "Please select"},
+                                   { :multiple => true, :size => 5 }
+                                 ) %>
+  </div>
+     <div ><%= f.button :submit, name="Confirmar", :class => "btn btn-success"%></div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :cliente %>
-    <%= form.text_field :cliente %>
-  </div>
-
-  <div class="field">
-    <%= form.label :producto %>
-    <%= form.text_field :producto %>
-  </div>
-
-  <div class="field">
-    <%= form.label :post %>
-    <%= form.text_field :post %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
+
+
+
