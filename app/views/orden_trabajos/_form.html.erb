@@ -1,4 +1,4 @@
-
+<div class="container">
 <%= simple_form_for (@orden_trabajo) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -6,18 +6,12 @@
   <div class="field">
     <%= f.input :cliente %>
     <%= f.input :producto%>
-<%= f.select(:post, [['Binder', 'Binder'],
-                                  ['Laminado', 'Laminado'],
-                                  ['BuV', 'BuV'],
-                                  ['Guillotina', 'Guillotina'],
-                                  ['Renz', 'Renz']
-                                 ],{ :prompt => "Please select"},
-                                   { :multiple => true, :size => 5 }
-                                 ) %>
+    <%= f.input :post, :label => "Terminacion", :collection => [["Buv","Buv"], ["Lam","Lam"], ["Renz", "Renz"]], :include_blank => "Anything", wrapper_html: { class: 'form-group' }, :as => :check_boxes, :input_html => {:post => "search[Terminacion][]", :multiple => true}, include_hidden: false %>
+
   </div>
      <div ><%= f.button :submit, name="Confirmar", :class => "btn btn-success"%></div>
     </div>
 <% end %>
 
 
-
+</div>
