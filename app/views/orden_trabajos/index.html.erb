@@ -6,20 +6,28 @@
 <table>
   <thead>
     <tr>
-      <th>Cliente</th>
-      <th>Producto</th>
-      <th>Post</th>
+      <th>Cliente   </th>
+      <th>Producto  </th>
+      <% listadopost.each do |lnropost| %>        
+        <th style='width: 5%;'><%=lnropost%>  </th>      
+      <% end %>  
+      
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @orden_trabajos.each do |orden_trabajo| %>
-
       <tr>
         <td><%= orden_trabajo.cliente %></td>
         <td><%= orden_trabajo.producto %></td>
-
+        
+        
+        <% vectorpostot(cadenatovector(orden_trabajo.post)).each do |nropost| %>        
+          <% if nropost %>        
+            <td><input type="checkbox"><%=nropost%></input></td>
+          <% end %>    
+        <% end %>  
         <td><%= link_to 'Show', orden_trabajo %></td>
         <td><%= link_to 'Edit', edit_orden_trabajo_path(orden_trabajo) %></td>
         <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
