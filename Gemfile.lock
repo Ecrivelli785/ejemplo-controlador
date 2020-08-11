@@ -60,6 +60,9 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     autoprefixer-rails (9.8.6.1)
       execjs
+    best_in_place (3.1.1)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     bindex (0.8.1)
     bootsnap (1.4.7)
       msgpack (~> 1.0)
@@ -210,6 +213,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  best_in_place (~> 3.1)
   bootsnap (>= 1.4.2)
   bootstrap-sass (~> 3.3, >= 3.3.6)
   byebug
