@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_185845) do
+ActiveRecord::Schema.define(version: 2020_08_10_175624) do
 
   create_table "orden_trabajos", force: :cascade do |t|
     t.string "cliente"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2020_08_06_185845) do
     t.string "post"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "maquina"
+    t.integer "ot"
   end
 
 end
