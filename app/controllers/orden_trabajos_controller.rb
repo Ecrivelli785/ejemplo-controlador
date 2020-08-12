@@ -4,7 +4,7 @@ class OrdenTrabajosController < ApplicationController
   # GET /orden_trabajos
   # GET /orden_trabajos.json
   def index
-    @orden_trabajos = OrdenTrabajo.all
+    @orden_trabajos = OrdenTrabajo.all.order('cliente ASC')
   end
 
   # GET /orden_trabajos/1
@@ -36,6 +36,7 @@ class OrdenTrabajosController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /orden_trabajos/1
   # PATCH/PUT /orden_trabajos/1.json
