@@ -52,8 +52,8 @@
             </select>
         </td>
         <td ><%= orden_trabajo.maquina %></td>
-        <td>15/08/2020</td>
-        <td>Cantidad maxima de caracteres 25................50</td>
+        <td> <%= orden_trabajo.fecha_entrega.strftime("%d/%m/%y") %></td>
+        <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
         <td>
      <!-- Example single danger button -->
 <script type="text/javascript">
