@@ -1,6 +1,6 @@
 class OrdenTrabajosController < ApplicationController
   before_action :set_orden_trabajo, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /orden_trabajos
   # GET /orden_trabajos.json
   def index
