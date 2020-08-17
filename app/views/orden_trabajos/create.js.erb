@@ -1,0 +1,13 @@
+<%  if @orden.errors.any? %>
+    <%# NOTE AUTHOR STEP 4: This removes any error messages that were previously generated. %>
+    <%#document.querySelector('#error_explanation') ? document.querySelector('#error_explanation').remove() : null ;
+    <%# NOTE AUTHOR STEP 4: This selects the new author `<form>` in `app/views/posts/new.html.erb` and `app/views/posts/edit.html.erb` and dynamically injects the `app/views/shared/_validation-messages.html.erb` partial. %>
+    document.querySelector('#orden_trabajo_form').insertAdjacentHTML('afterbegin', '<%= escape_javascript(render "shared/validation-messages", object: @author) %>');
+<%  else %>
+    <%#document.querySelector('#error_explanation') ? document.querySelector('#error_explanation').remove() : null ;%>
+      
+    document.querySelector('select#post_orden_trabajo_id').insertAdjacentHTML('afterbegin', 
+        '<select id= "<%=orden_trabajo.id + 100%>" multiple="multiple"><%cadenatovector(orden_trabajo.maquina).each do |emaquina|%><option value = <%= emaquina %> selected= "selected"><%= emaquina %></option><%end%></select>') ;
+    <%# NOTE AUTHOR STEP 4: This selects the new author `<form>` in `app/views/posts/new.html.erb` and `app/views/posts/edit.html.erb` and resets the fields. %>
+    document.querySelector('#orden_trabajo_form').reset();
+<%  end %>

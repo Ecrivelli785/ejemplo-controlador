@@ -31,43 +31,67 @@
     </tr>
   </thead>
 
-
   <tbody id="myTable">
     <% @orden_trabajos.each do |orden_trabajo| %>
       <tr>
-        <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.id, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.cliente, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.producto, orden_trabajo %></td>
-        <td>
+
+    <!-- Multiselect orden_trabajo.post -->
+         <td>
             <script type="text/javascript">
               var paso;
-              for (paso = 0; paso < 3; paso++) {
+              for (paso = 0; paso < 5; paso++) {
                 $(document).ready(function() {$('#'+"<%=orden_trabajo.id%>").multiselect();});
               };
             </script>
+
             <select id= "<%=orden_trabajo.id%>" multiple="multiple">
               <%cadenatovector(orden_trabajo.post).each do |epost|%>
-                <option value = <%= epost %>><%= epost %></option>
+                <option value = <%= epost %> selected><%= epost %></option>
               <%end%>
             </select>
         </td>
-        <td ><%= orden_trabajo.maquina %></td>
+
+    <!-- Multiselect orden_trabajo.maquina -->
+        <td>
+            <script type="text/javascript">
+              var paso;
+              for (paso = 0; paso < 5; paso++) {
+                $(document).ready(function() {$('#'+"<%=orden_trabajo.id + 100%>").multiselect();});
+              };
+            </script>
+
+            <select id= "<%=orden_trabajo.id + 100%>" multiple="multiple">
+              <% OrdenTrabajo::MAQUINA.each do |vmaquina| %>
+                <%if cadenatovector(orden_trabajo.maquina).include?  vmaquina %>
+                    <option value = <%= vmaquina %> selected><%= vmaquina %></option>
+                  <%else%>
+                    <option value = <%= vmaquina %> ><%= vmaquina %></option>
+                <%end%>
+              <%end%>
+            </select>
+        </td>
+
+
         <td> <%= orden_trabajo.fecha_entrega.strftime("%d/%m/%y") %></td>
         <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
+  <!-- Example single danger button -->
         <td>
-     <!-- Example single danger button -->
-<script type="text/javascript">
-    $('#example-multiple-selected');
-</script>
-<!-- Note the missing multiple attribute! -->
-<select id="example-multiple-selected">
-    <option value="1">Espera</option>
-    <option value="2">Diseño</option>
-    <option value="3">CTP</option>
-    <option value="4">Impresión</option>
-    <option value="5">Post</option>
-    <option value="6">Terminado</option>
-</select> </td>
+            <script type="text/javascript">
+                $('#example-multiple-selected');
+            </script>
+            <!-- Note the missing multiple attribute! -->
+            <select id="example-multiple-selected">
+                <option value="1">Espera</option>
+                <option value="2">Diseño</option>
+                <option value="3">CTP</option>
+                <option value="4">Impresión</option>
+                <option value="5">Post</option>
+                <option value="6">Terminado</option>
+            </select>
+         </td>
         <td><%= link_to 'Edit', edit_orden_trabajo_path(orden_trabajo) %></td>
         <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
