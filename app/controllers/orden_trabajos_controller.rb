@@ -12,6 +12,9 @@ class OrdenTrabajosController < ApplicationController
   def show
   end
 
+def digital
+   @orden_trabajos = OrdenTrabajo.all
+end
   # GET /orden_trabajos/new
   def new
     @orden_trabajo = OrdenTrabajo.new

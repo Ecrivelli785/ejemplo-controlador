@@ -35,7 +35,7 @@
   <tbody id="myTable">
     <% @orden_trabajos.each do |orden_trabajo| %>
       <tr>
-        <td><%= link_to orden_trabajo.id, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.cliente, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.producto, orden_trabajo %></td>
         <td>
@@ -71,11 +71,9 @@
         <td><%= link_to 'Edit', edit_orden_trabajo_path(orden_trabajo) %></td>
         <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+
     <% end %>
+
   </tbody>
+
 </table>
-<br>
-
-<script>
-
-</script>
