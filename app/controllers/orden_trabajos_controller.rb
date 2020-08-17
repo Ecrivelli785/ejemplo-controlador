@@ -11,7 +11,6 @@ class OrdenTrabajosController < ApplicationController
   # GET /orden_trabajos/1.json
   def show
   end
-
   # GET /orden_trabajos/new
   def new
     @orden_trabajo = OrdenTrabajo.new
@@ -62,6 +61,48 @@ class OrdenTrabajosController < ApplicationController
     end
   end
 
+
+# ESTE SECTOR DEL CONTROLADOR ES PARA LAS DIFERENTES VIEWS DE IMPRESIÓN Y POST
+# ------------------------------------------------------------------------
+def digital
+   @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
+end
+
+def offset
+   @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
+end
+
+def post1
+   @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
+end
+
+def post2
+   @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
+end
+
+def post3
+   @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
+end
+
+def post4
+   @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
+end
+
+def post5
+   @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
+end
+
+def post6
+   @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
+end
+
+def post7
+   @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
+end
+# ------------------------------------------------------------------------
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_orden_trabajo
@@ -70,6 +111,6 @@ class OrdenTrabajosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def orden_trabajo_params
-      params.require(:orden_trabajo).permit(:cliente, :producto, :ot, :post => [], :maquina => [])
+      params.require(:orden_trabajo).permit(:cliente, :producto, :ot, :fecha_entrega, :observaciones, :post => [], :maquina => [])
     end
 end

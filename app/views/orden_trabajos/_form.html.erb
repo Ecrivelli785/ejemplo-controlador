@@ -7,8 +7,10 @@
   <div class="field">
     <%= f.input :ot %>
     <%= f.input :cliente %>
+    <%= f.input :fecha_entrega, :default=>Date.today + 8.days %>
+    <%= f.input :observaciones %>
     <%= f.input :producto%>
-    <%= f.input :post, :label => "Terminacion", :collection => [["Buv","Buv"], ["Lam","Lam"], ["Renz", "Renz"], ["Minerva","Minerva"], ["Plana","Plana"]], :include_blank => "Anything", wrapper_html: { class: 'form-group' }, :as => :check_boxes, :input_html => {:post => "search[Terminacion][]", :multiple => true}, include_hidden: false %>
+    <%= f.input :post, :label => "Terminacion", :collection => [["Buv","Buv"], ["Lam","Lam"], ["Minerva","Minerva"], ["Plana","Plana"], ["Fidia","Fidia"], ["Baum","Baum"], ["Renz", "Renz"], ["Duplo","Duplo"], ["C.Hilo","C. Hilo"], ["Binder","Binder"], ["Zechini","Zechini"], ["Alzadora","Alzadora"],["C.Alambre","C.Alambre"], ["Guillotina","Guillotina"],["T.Manuales","T.Manuales"],["Otros","Otros"], ["Empaque","Empaque"] ], :include_blank => "Anything", wrapper_html: { class: 'form-group' }, :as => :check_boxes, :input_html => {:post => "search[Terminacion][]", :multiple => true}, include_hidden: false %>
     <%= f.input :maquina, :label => "Impresión", :collection => [["Ko","Ko"], ["SM","SM"], ["PM", "PM"], ["GTO","GTO"], ["Xe","Xe"]], :include_blank => "Anything", wrapper_html: { class: 'form-group' }, :as => :check_boxes, :input_html => {:post => "search[Terminacion][]", :multiple => true}, include_hidden: false %>
 
   </div>
