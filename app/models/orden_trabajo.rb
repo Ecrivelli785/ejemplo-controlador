@@ -1,4 +1,8 @@
 class OrdenTrabajo < ApplicationRecord
-  POST = ['COMERCIAL', 'INDUSTRIAL', 'PARTICULAR', 'EDUCACIONAL', 'ESTATAL', 'OTROS']
+    POST = ['Buv', 'Lam', 'Renz', 'Minerva','Plana']
+
+    MAQUINA = [ "Ko", "SM", "PM", "GTO","Xe"]
+
+    
 
 end

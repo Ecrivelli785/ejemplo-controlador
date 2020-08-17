@@ -1,4 +1,13 @@
+
 <p id="notice"><%= notice %></p>
+
+<!-- Include Twitter Bootstrap and jQuery: -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+ 
+<link rel="stylesheet" href="css/bootstrap-multiselect.css">
+<!-- fin de las referencias -->
 
 <div class="d-flex justify-content-between mr-5 ml-2">
 <div><h3>Orden Trabajos</h3></div>
@@ -24,44 +33,22 @@
     <% @orden_trabajos.each do |orden_trabajo| %>
       <tr>
 
-        <td><%= link_to orden_trabajo.id, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.cliente, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.producto, orden_trabajo %></td>
-        <td><!-- Multiselect orden_trabajo.post -->
-            <script type="text/javascript">
-              var paso;
-              for (paso = 0; paso < 5; paso++) {
-                $(document).ready(function() {$('#'+"<%=orden_trabajo.id%>").multiselect();});
-              };  
-            </script>
-
-            <select id= "<%=orden_trabajo.id%>" multiple="multiple">
+        <td><select id="multiselect" multiple="multiple">
               <%cadenatovector(orden_trabajo.post).each do |epost|%>
-                <option value = <%= epost %> selected><%= epost %></option>    
-              <%end%>               
+                <option value = "<%= epost %>"><%= epost %></option>    
+              <%end%>
             </select>
         </td>
-        
-        <td><!-- Multiselect orden_trabajo.maquina -->
-            <script type="text/javascript">
-              var paso;
-              for (paso = 0; paso < 5; paso++) {
-                $(document).ready(function() {$('#'+"<%=orden_trabajo.id + 100%>").multiselect();});
-              };  
-            </script>
-
-            <select id= "<%=orden_trabajo.id + 100%>" multiple="multiple">
-              <% OrdenTrabajo::MAQUINA.each do |vmaquina| %>      
-                <%if cadenatovector(orden_trabajo.maquina).include?  vmaquina %>
-                    <option value = <%= vmaquina %> selected><%= vmaquina %></option>    
-                  <%else%>
-                    <option value = <%= vmaquina %> ><%= vmaquina %></option>    
-                <%end%>               
-              <%end%>  
-            </select>
-
-        </td>
-        
+        <!-- Initialize the plugin: -->
+        <script type="text/javascript">
+          $(document).ready(function() {
+          $('#multiselect').multiselect();
+            });
+        </script>
+        <td ><%= orden_trabajo.maquina %></td>
         <td>15/08/2020</td>
         <td>Cantidad maxima de caracteres 25................50</td>
         <td>
@@ -77,9 +64,6 @@
     <a class="dropdown-item" href="#">Post-Impresión</a>
     <a class="dropdown-item" href="#">Final</a>
   </div>
-  <script type="text/javascript">
-    $('#example-multiple-selected').multiselect();
-</script>
 </div>
         <td><%= link_to 'Edit', edit_orden_trabajo_path(orden_trabajo) %></td>
         <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
