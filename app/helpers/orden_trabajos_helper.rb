@@ -2,7 +2,7 @@ module OrdenTrabajosHelper
 
 	def cadenatovector(cadena)
 		if cadena == nil
-			return cadena
+      return [""]
 		else
 			cadena = cadena.gsub "[", ""
 			cadena = cadena.gsub "]", ""

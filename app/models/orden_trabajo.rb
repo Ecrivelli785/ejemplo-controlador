@@ -1,9 +1,5 @@
 class OrdenTrabajo < ApplicationRecord
 
-    POST = ['Buv', 'Lam', 'Renz', 'Minerva','Plana']
-
-    MAQUINA = [ "Ko", "SM", "PM", "GTO","Xe"]
-
-
-
+POST = ["Buv", "Lam","Minerva","Plana","Fidia","Baum","Renz","Duplo","C.Hilo","Binder","Zechini","Alzadora","C.Alambre","Guillotina","T.Manual","Otros","Empaque"]
+MAQUINA =["Ko", "SM", "PM", "GTO","Xe"]
 end

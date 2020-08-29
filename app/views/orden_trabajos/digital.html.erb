@@ -16,7 +16,7 @@
           <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
             <td><%= orden_trabajo.cliente %></td>
             <td><%= orden_trabajo.producto %></td>
-            <td><%= orden_trabajo.observaciones %></td>
+            <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
             <td><%= orden_trabajo.fecha_entrega %></td>
             <td>
         <% end %>
@@ -43,7 +43,7 @@
           <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
             <td><%= orden_trabajo.cliente %></td>
             <td><%= orden_trabajo.producto %></td>
-            <td><%= orden_trabajo.observaciones %></td>
+            <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
             <td> <%= orden_trabajo.fecha_entrega %></td>
           <% end %>
         <% end %>
@@ -54,10 +54,11 @@
 </div>
 
 
-<!--
+<script>
 //Using setTimeout to execute a function after 5 seconds.
 setTimeout(function () {
    //Redirect with JavaScript
    window.location.href= 'http://localhost:3000/offset';
-},  30000);
- -->
+},  5000);
+
+</script>

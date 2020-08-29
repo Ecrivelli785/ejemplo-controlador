@@ -3,19 +3,19 @@
 <div class="ml-3 mb-2"><h3>Orden Trabajos</h3></div>
 <div><h3> <%= link_to ' + Nuevo trabajo', new_orden_trabajo_path %></h3></div>
 </div>
-
+<!--Buscador Jquery-->
 <script>
   $(document).ready(function(){
-  $("#myInput").on("keyup", function() {
+  $("#buscador_datos").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
+    $("#TablaOrdenesTrabajos tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
 });
 </script>
-
-<input class="ml-3 w-25" id="myInput" type="text" placeholder="Buscar trabajo">
+<input class="ml-3 w-25" id="buscador_datos" type="text" placeholder="Buscar trabajo">
+<!--Fin buscador jquery-->
 <table class="table table-striped  m-2">
   <thead>
     <tr>
@@ -23,61 +23,63 @@
       <th>Cliente</th>
       <th>Producto</th>
       <th>Post</th>
-      <th>Maquina</th>
+      <th></th>
+      <th>Procesos</th>
       <th>Fecha entrega</th>
       <th>Observaciones</th>
       <th>Estado actual</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
-  <tbody id="myTable">
+<!--Incio Tabla-->
+  <tbody id="TablaOrdenesTrabajos">
     <% @orden_trabajos.each do |orden_trabajo| %>
       <tr>
-        <td><%= link_to orden_trabajo.id, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.cliente, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.producto, orden_trabajo %></td>
-
-    <!-- Multiselect orden_trabajo.post -->
-         <td>
-            <script type="text/javascript">
-              var paso;
-              for (paso = 0; paso < 5; paso++) {
-                $(document).ready(function() {$('#'+"<%=orden_trabajo.id%>").multiselect();});
-              };
-            </script>
-
-            <select id= "<%=orden_trabajo.id%>" multiple="multiple">
-              <%cadenatovector(orden_trabajo.post).each do |epost|%>
-                <option value = <%= epost %> selected><%= epost %></option>
-              <%end%>
-            </select>
-        </td>
-
-    <!-- Multiselect orden_trabajo.maquina -->
         <td>
+            <!-- Multiselect dropdown orden_trabajo.post -->
             <script type="text/javascript">
-              var paso;
-              for (paso = 0; paso < 5; paso++) {
-                $(document).ready(function() {$('#'+"<%=orden_trabajo.id + 100%>").multiselect();});
-              };
+                $(document).ready(function() {
+                  $("#orden_trabajo_post_<%=orden_trabajo.id%>").multiselect({
+                      allSelectedText: 'Showing All'
+                  });
+                  document.getElementById("Muestra_proceso_seleccionado<%=orden_trabajo.id%>").innerHTML = "<%=orden_trabajo.post%>";
+                });
+                //Fin del efecto multiselect orden_trabajo.post
+                //Cambia los valores de la cadena de proceso
+                $(function () {
+                  $("#orden_trabajo_post_<%=orden_trabajo.id%>").change(function () {
+                    var ValorSeleccionadoDropdown = $(this).val();
+                    document.getElementById("Muestra_proceso_seleccionado<%=orden_trabajo.id%>").innerHTML = ValorSeleccionadoDropdown;
+                    //document.getElementById("#Procesos_seleccionados").innerHTML = ValorSeleccionadoDropdown;
+                    $(document).ready(function(){$("#<%=orden_trabajo.id%>").val(ValorSeleccionadoDropdown)});
+                    console.log("Procesosseleccionados_<%=orden_trabajo.id%>");
+                  });
+                });
+                //Fin de cambio los valores de la cadena de proceso
             </script>
-
-            <select id= "<%=orden_trabajo.id + 100%>" multiple="multiple">
-              <% OrdenTrabajo::MAQUINA.each do |vmaquina| %>
-                <%if cadenatovector(orden_trabajo.maquina).include?  vmaquina %>
-                    <option value = <%= vmaquina %> selected><%= vmaquina %></option>
+            <!-- Multiselect dropdown html -->
+            <select id= "orden_trabajo_post_<%=orden_trabajo.id%>" multiple="multiple">
+              <% OrdenTrabajo::POST.each do |elemento_proceso| %>
+                <%if cadenatovector(orden_trabajo.post).include?  elemento_proceso %>
+                    <option value = <%= elemento_proceso %> selected><%= elemento_proceso %></option>
                   <%else%>
-                    <option value = <%= vmaquina %> ><%= vmaquina %></option>
-                <%end%>
+                    <option value = <%= elemento_proceso %> ><%= elemento_proceso %></option>
+                  <%end%>
               <%end%>
             </select>
+            <!-- Fin multiselect dropdown html -->
         </td>
-
-
-        <td> <%= orden_trabajo.fecha_entrega.strftime("%d/%m/%y") %></td>
+        <td><%= simple_form_for (orden_trabajo), remote: true  do |f| %>
+              <%= f.input :post, :as => :hidden, :input_html => { :id => orden_trabajo.id } %>
+              <%= f.button :submit, name="Confirmar", :class => "btn btn-success"%>
+            <% end %> <!-- Fin del simple form-->
+        </td>
+        <td> <p id="Muestra_proceso_seleccionado<%=orden_trabajo.id%>"></p></td>
+        <td> <%= orden_trabajo.fecha_entrega %></td>
         <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
-  <!-- Example single danger button -->
         <td>
             <script type="text/javascript">
                 $('#example-multiple-selected');
@@ -92,12 +94,10 @@
                 <option value="6">Terminado</option>
             </select>
          </td>
-        <td><%= link_to 'Edit', edit_orden_trabajo_path(orden_trabajo) %></td>
+        <td><%= link_to 'Edit', edit_orden_trabajo_path(orden_trabajo)%></td>
         <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-
     <% end %>
-
   </tbody>
-
+  <!--Fin Tabla-->
 </table>
