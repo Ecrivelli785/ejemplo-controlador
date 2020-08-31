@@ -9,6 +9,22 @@ class OrdenTrabajosController < ApplicationController
       format.html # index.html.erb
       format.js # index.js.erb
       format.json { render json: @orden_trabajos}
+             format.pdf do
+        render pdf: 'listado/pdf', pdf: 'Listado'
+      end
+    end
+  end
+
+  def listado
+    @orden_trabajos = OrdenTrabajo.all.order('cliente ASC')
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js # index.js.erb
+      format.json { render json: @orden_trabajos}
+       format.pdf do
+        render pdf: 'listado/pdf', pdf: 'Listado',
+        :orientation => 'landscape'
+      end
     end
   end
 
@@ -60,12 +76,6 @@ class OrdenTrabajosController < ApplicationController
       end
     end
   end
-
-
-
-
-
-
 
 
   # DELETE /orden_trabajos/1
