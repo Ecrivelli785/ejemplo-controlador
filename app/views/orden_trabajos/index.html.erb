@@ -98,17 +98,23 @@
 
         <td><%= simple_form_for (orden_trabajo), remote: true  do |f| %>
               <%= f.input :post, :as => :hidden, :input_html => { :id => orden_trabajo.id } %>
-              <%= f.button :submit, name="Confirmar", :class => "btn btn-success"%>
         </td>
-
         <td><p id="Muestra_proceso_seleccionado<%=orden_trabajo.id%>"></p></td>
-        <td><%= orden_trabajo.fecha_entrega%></td>
+        <td><%= f.text_field :fecha_entrega, :class => 'datepicker' , :default=>Date.today + 8.day %></td>
         <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
+        <td><%= f.button :submit, name="OK", :class => "btn btn-primary btn-sm"%></td>
         <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
       </tr>
         <% end %> <!-- Fin del simple form-->
     <% end %>
   </tbody>
   <!--Fin Tabla-->
 </table>
+
+
+<script>
+  $('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});
+</script>

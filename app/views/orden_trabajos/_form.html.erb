@@ -5,7 +5,7 @@
   <div class="select1">
     <%= f.input :ot %>
     <%= f.input :cliente %>
-    <%= f.input :fecha_entrega, :default=>Date.today + 8.days %>
+    <%= f.text_field :fecha_entrega, :class => 'datepicker' , :default=>Date.today + 8.day %>
     <%= f.input :observaciones %>
     <%= f.input :producto%>
 
@@ -86,4 +86,8 @@
 
 <script>
 
+$('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});
 </script>

@@ -38,7 +38,7 @@
       </thead>
       <tbody>
     <% @orden_trabajos.each do |orden_trabajo| %>
-    <% if orden_trabajo.maquina.include? "Xe" %>
+    <% if orden_trabajo.post.include? "Xe" %>
 
           <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
             <td><%= orden_trabajo.cliente %></td>

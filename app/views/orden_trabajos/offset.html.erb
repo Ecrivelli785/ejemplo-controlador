@@ -41,7 +41,7 @@
       </thead>
       <tbody>
     <% @orden_trabajos.each do |orden_trabajo| %>
-    <% if orden_trabajo.maquina.include? "PM" %>
+    <% if orden_trabajo.post.include? "PM" %>
 
           <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
             <td><%= orden_trabajo.cliente %></td>
@@ -69,7 +69,7 @@
       </thead>
       <tbody>
     <% @orden_trabajos.each do |orden_trabajo| %>
-    <% if orden_trabajo.maquina.include? "GTO" %>
+    <% if orden_trabajo.post.include? "GTO" %>
 
           <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
             <td><%= orden_trabajo.cliente %></td>
