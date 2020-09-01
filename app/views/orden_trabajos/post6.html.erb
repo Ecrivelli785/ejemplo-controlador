@@ -16,7 +16,7 @@
           <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
             <td><%= orden_trabajo.cliente %></td>
             <td><%= orden_trabajo.producto %></td>
-            <td><%= orden_trabajo.observaciones %></td>
+            <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
             <td><%= orden_trabajo.fecha_entrega %></td>
             <td>
         <% end %>
@@ -38,12 +38,12 @@
       </thead>
       <tbody>
     <% @orden_trabajos.each do |orden_trabajo| %>
-    <% if orden_trabajo.post.include? "T.Manuales" %>
+    <% if orden_trabajo.post.include? "T.Manual" %>
 
           <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
             <td><%= orden_trabajo.cliente %></td>
             <td><%= orden_trabajo.producto %></td>
-            <td><%= orden_trabajo.observaciones %></td>
+            <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
             <td> <%= orden_trabajo.fecha_entrega %></td>
           <% end %>
         <% end %>
@@ -71,7 +71,7 @@
           <tr class="<%= "bg-danger font-weight-bold" if (orden_trabajo.fecha_entrega <= Date.today + 1) %>">
             <td><%= orden_trabajo.cliente %></td>
             <td><%= orden_trabajo.producto %></td>
-            <td><%= orden_trabajo.observaciones %></td>
+            <td id="commentDiv"><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
             <td> <%= orden_trabajo.fecha_entrega %></td>
           <% end %>
         <% end %>
@@ -90,3 +90,8 @@ setTimeout(function () {
    window.location.href= 'http://localhost:3000/offset';
 },  30000);
  -->
+<script>
+  var div= document.getElementById('commentDiv');
+var hoverText= "some comments";
+div.innerHTML= hoverText;
+</script>

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
 
 # Rutas creadas para cada pantalla
+    get 'listado', to: 'orden_trabajos#listado', as: :listado
     get 'offset', to: 'orden_trabajos#offset', as: :offset
     get 'digital', to: 'orden_trabajos#digital', as: :digital
     get 'post1', to: 'orden_trabajos#post1', as: :post1

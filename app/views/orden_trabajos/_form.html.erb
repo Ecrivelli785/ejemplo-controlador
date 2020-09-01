@@ -1,25 +1,93 @@
-<% if params[:controller] === 'orden_trabajos' %>
-    <%= form_with model: @orden_trabajo, id: "orden_trabajo_form" do |f| %>
-        <%= render 'orden_trabajos/form-fields', f: f %>
-    <% end %>
-<% else %>
-    <%= form_with model: @orden_trabajo, local: true  do |f| %>
-        <%= render 'shared/validation-messages', object: f.object %>
-        <%= render 'orden_trabajos/form-fields', f: f %>
-    <% end %>
+<div class="container">
+<%= simple_form_for (@orden_trabajo)  do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="select1">
+    <%= f.input :ot %>
+    <%= f.input :cliente %>
+    <%= f.text_field :fecha_entrega, :class => 'datepicker' , :default=>Date.today + 8.day %>
+    <%= f.input :observaciones %>
+    <%= f.input :producto%>
+
+
+    <div>
+            <!-- Multiselect orden_trabajo.post -->
+            <script type="text/javascript">
+                $(document).ready(function() {
+                  $("#orden_trabajo_p_<%=orden_trabajo.id%>").multiselect({
+                      includeSelectAllOption: true,
+                      allSelectedText: 'Showing All'
+                  });
+                });
+                $(function () {
+                  $("#orden_trabajo_p_<%=orden_trabajo.id%>").change(function () {
+                    var selectedValue = $(this).val();
+                    console.log(selectedValue);
+                    agregarelemento(selectedValue);
+                  });
+                });
+                function agregarelemento(valor) {
+                    var my_prueba = valor.toString();
+                    $(document).ready(function(){$("#vpost").val(my_prueba);
+                    });
+                };
+            </script>
+
+
+
+            <select id= "orden_trabajo_p_<%=orden_trabajo.id%>" multiple="multiple">
+              <% OrdenTrabajo::POST.each do |elemento_post| %>
+                <%if cadenatovector(orden_trabajo.post).include?  elemento_post %>
+                    <option value = <%= elemento_post %> selected><%= elemento_post %></option>
+                  <%else%>
+                    <option value = <%= elemento_post %> ><%= elemento_post %></option>
+                  <%end%>
+              <%end%>
+            </select>
+
+          <%= f.input :post, :as => :hidden, :input_html => { :id => "vpost" } %>
+
+    </div>
+
+        <div>
+            <!-- Multiselect orden_trabajo.maquina -->
+            <script type="text/javascript">
+                $(document).ready(function() {
+                  $("#orden_trabajo_m_<%=orden_trabajo.id%>").multiselect({
+                      includeSelectAllOption: true,
+                      allSelectedText: 'Showing All'
+                  });
+                });
+                $(function () {
+                  $("#orden_trabajo_m_<%=orden_trabajo.id%>").change(function () {
+                    var selectedValue = $(this).val();
+                    console.log(selectedValue);
+                  });
+                });
+            </script>
+            <select id= "orden_trabajo_m_<%=orden_trabajo.id%>" multiple="multiple">
+              <% OrdenTrabajo::MAQUINA.each do |elemento_maquina| %>
+                <%if cadenatovector(orden_trabajo.maquina).include?  elemento_maquina %>
+                  <option value = <%= elemento_maquina %> selected><%= elemento_maquina %></option>
+                <%else%>
+                  <option value = <%= elemento_maquina %> ><%= elemento_maquina %></option>
+                <%end%>
+              <%end%>
+            </select>
+    </div>
+
+
+  </div>
+<div >
+  <%= f.button :submit, name="Confirmar", :class => "btn btn-success"%></div>
+</div>
 <% end %>
 
 
+<script>
 
-
-<!-- Viejo form que usa el multiselect con checkboxes -->
-
-  <!-- <div class="field"> -->
-    <%#= f.input :ot %>
-    <%#= f.input :cliente %>
-    <%#= f.input :fecha_entrega, :default=>Date.today + 8.days %>
-    <%#= f.input :observaciones %>
-    <%#= f.input :producto%>
-    <%#= f.input :post, :label => "Terminacion", :collection => [["Buv","Buv"], ["Lam","Lam"], ["Minerva","Minerva"], ["Plana","Plana"], ["Fidia","Fidia"], ["Baum","Baum"], ["Renz", "Renz"], ["Duplo","Duplo"], ["C.Hilo","C. Hilo"], ["Binder","Binder"], ["Zechini","Zechini"], ["Alzadora","Alzadora"],["C.Alambre","C.Alambre"], ["Guillotina","Guillotina"],["T.Manuales","T.Manuales"],["Otros","Otros"], ["Empaque","Empaque"] ], :include_blank => "Anything", wrapper_html: { class: 'form-group' }, :as => :check_boxes, :input_html => {:post => "search[Terminacion][]", :multiple => true}, include_hidden: false %>
-    <%#= f.input :maquina, :label => "Impresión", :collection => [["Ko","Ko"], ["SM","SM"], ["PM", "PM"], ["GTO","GTO"], ["Xe","Xe"]], :include_blank => "Anything", wrapper_html: { class: 'form-group' }, :as => :check_boxes, :input_html => {:post => "search[Terminacion][]", :multiple => true}, include_hidden: false %>
-
+$('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});
+</script>

@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Ot:</strong>
+  <%= @orden_trabajo.ot %>
+</p>
+
+
+<p>
   <strong>Cliente:</strong>
   <%= @orden_trabajo.cliente %>
 </p>
@@ -21,3 +27,4 @@
 
 <%= link_to 'Edit', edit_orden_trabajo_path(@orden_trabajo) %> |
 <%= link_to 'Back', orden_trabajos_path %>
+

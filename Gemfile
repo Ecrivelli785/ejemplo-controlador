@@ -26,6 +26,9 @@ gem 'best_in_place', '~> 3.1'
 gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
 
@@ -58,5 +61,9 @@ group :test do
   gem 'webdrivers'
 end
 
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

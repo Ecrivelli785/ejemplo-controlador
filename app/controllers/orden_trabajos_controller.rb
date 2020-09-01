@@ -1,10 +1,31 @@
 class OrdenTrabajosController < ApplicationController
   before_action :set_orden_trabajo, only: [:show, :edit, :update, :destroy]
-  
+
   # GET /orden_trabajos
   # GET /orden_trabajos.json
   def index
     @orden_trabajos = OrdenTrabajo.all.order('cliente ASC')
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js # index.js.erb
+      format.json { render json: @orden_trabajos}
+             format.pdf do
+        render pdf: 'listado/pdf', pdf: 'Listado'
+      end
+    end
+  end
+
+  def listado
+    @orden_trabajos = OrdenTrabajo.all.order('cliente ASC')
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js # index.js.erb
+      format.json { render json: @orden_trabajos}
+       format.pdf do
+        render pdf: 'listado/pdf', pdf: 'Listado',
+        :orientation => 'landscape'
+      end
+    end
   end
 
   # GET /orden_trabajos/1
@@ -18,6 +39,10 @@ class OrdenTrabajosController < ApplicationController
 
   # GET /orden_trabajos/1/edit
   def edit
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
   end
 
   # POST /orden_trabajos
@@ -44,12 +69,14 @@ class OrdenTrabajosController < ApplicationController
       if @orden_trabajo.update(orden_trabajo_params)
         format.html { redirect_to @orden_trabajo, notice: 'Orden trabajo was successfully updated.' }
         format.json { render :show, status: :ok, location: @orden_trabajo }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @orden_trabajo.errors, status: :unprocessable_entity }
       end
     end
   end
+
 
   # DELETE /orden_trabajos/1
   # DELETE /orden_trabajos/1.json
@@ -111,6 +138,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def orden_trabajo_params
-      params.require(:orden_trabajo).permit(:cliente, :producto, :ot, :fecha_entrega, :observaciones, :post => [], :maquina => [])
+      params.require(:orden_trabajo).permit(:cliente, :producto, :ot, :fecha_entrega, :observaciones, :post, :maquina)
     end
 end
