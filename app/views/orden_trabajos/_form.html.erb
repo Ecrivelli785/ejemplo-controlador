@@ -48,35 +48,6 @@
           <%= f.input :post, :as => :hidden, :input_html => { :id => "vpost" } %>
 
     </div>
-
-        <div>
-            <!-- Multiselect orden_trabajo.maquina -->
-            <script type="text/javascript">
-                $(document).ready(function() {
-                  $("#orden_trabajo_m_<%=orden_trabajo.id%>").multiselect({
-                      includeSelectAllOption: true,
-                      allSelectedText: 'Showing All'
-                  });
-                });
-                $(function () {
-                  $("#orden_trabajo_m_<%=orden_trabajo.id%>").change(function () {
-                    var selectedValue = $(this).val();
-                    console.log(selectedValue);
-                  });
-                });
-            </script>
-            <select id= "orden_trabajo_m_<%=orden_trabajo.id%>" multiple="multiple">
-              <% OrdenTrabajo::MAQUINA.each do |elemento_maquina| %>
-                <%if cadenatovector(orden_trabajo.maquina).include?  elemento_maquina %>
-                  <option value = <%= elemento_maquina %> selected><%= elemento_maquina %></option>
-                <%else%>
-                  <option value = <%= elemento_maquina %> ><%= elemento_maquina %></option>
-                <%end%>
-              <%end%>
-            </select>
-    </div>
-
-
   </div>
 <div >
   <%= f.button :submit, name="Confirmar", :class => "btn btn-success"%></div>
