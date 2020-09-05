@@ -26,9 +26,8 @@
       <th>Cliente</th>
       <th>Producto</th>
       <th>Estado actual</th>
-      <th>Post</th>
+      <th>Proceso</th>
       <th></th>
-      <th>Procesos</th>
       <th>Fecha entrega</th>
       <th>Observaciones</th>
       <th colspan="3"></th>
@@ -64,7 +63,6 @@
                   $("#orden_trabajo_post_<%=orden_trabajo.id%>").multiselect({
                       allSelectedText: 'Showing All'
                   });
-                  document.getElementById("Muestra_proceso_seleccionado<%=orden_trabajo.id%>").innerHTML = "<%=orden_trabajo.post%>";
                 });
             //Fin del efecto multiselect orden_trabajo.post
 
@@ -73,13 +71,20 @@
                 $(function () {
                   $("#orden_trabajo_post_<%=orden_trabajo.id%>").change(function () {
                     var ValorSeleccionadoDropdown = $(this).val();
-                    document.getElementById("Muestra_proceso_seleccionado<%=orden_trabajo.id%>").innerHTML = ValorSeleccionadoDropdown;
                     //document.getElementById("#Procesos_seleccionados").innerHTML = ValorSeleccionadoDropdown;
                     $(document).ready(function(){$("#<%=orden_trabajo.id%>").val(ValorSeleccionadoDropdown)});
                     console.log("Procesosseleccionados_<%=orden_trabajo.id%>");
                   });
                 });
             //Fin de cambio los valores de la cadena de proceso
+
+
+            // Inicio de Date Picekr
+              $('.datepicker').datepicker({
+                format: 'mm/dd/yyyy',
+                startDate: '-3d'
+              });
+              // Fin del Date Picker
             </script>
 
 
@@ -99,10 +104,9 @@
         <td><%= simple_form_for (orden_trabajo), remote: true  do |f| %>
               <%= f.input :post, :as => :hidden, :input_html => { :id => orden_trabajo.id } %>
         </td>
-        <td><p id="Muestra_proceso_seleccionado<%=orden_trabajo.id%>"></p></td>
-        <td><%= f.text_field :fecha_entrega, :class => 'datepicker' , :default=>Date.today + 8.day %></td>
-        <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
-        <td><%= f.button :submit, name="OK", :class => "btn btn-primary btn-sm"%></td>
+        <td><%= f.input :fecha_entrega, :class => 'datepicker', :default=>Date.today + 15.day, as: :date, html5: true ,label: false %></td>
+        <td><%= f.input :observaciones,  label: false %>  </td>
+        <td><%= f.button :submit, name="OK", :class => "btn btn-primary btn-lg"%></td>
         <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
         <% end %> <!-- Fin del simple form-->
@@ -112,9 +116,4 @@
 </table>
 
 
-<script>
-  $('.datepicker').datepicker({
-    format: 'mm/dd/yyyy',
-    startDate: '-3d'
-});
-</script>
+
