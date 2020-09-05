@@ -138,6 +138,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def orden_trabajo_params
-      params.require(:orden_trabajo).permit(:cliente, :producto, :ot, :fecha_entrega, :observaciones, :post, :estado_actual)
+      params.require(:orden_trabajo).permit(:cliente, :producto, :ot, :fecha_entrega, :observaciones, :post, :estado_actual, :cantidad)
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_05_172922) do
+ActiveRecord::Schema.define(version: 2020_09_05_184900) do
 
   create_table "orden_trabajos", force: :cascade do |t|
     t.string "cliente"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_09_05_172922) do
     t.string "observaciones"
     t.date "fecha_entrega"
     t.string "estado_actual"
+    t.integer "cantidad"
   end
 
 end

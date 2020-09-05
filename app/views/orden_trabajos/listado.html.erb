@@ -28,6 +28,7 @@
       <th>Ot</th>
       <th>Cliente</th>
       <th>Producto</th>
+      <th>Cantidad</th>
       <th>Post</th>
       <th></th>
       <th>Procesos</th>
@@ -44,6 +45,7 @@
         <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.cliente, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.producto, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.cantidad, orden_trabajo %></td>
         <td><%= orden_trabajo.post %></td>
         <td><%= orden_trabajo.fecha_entrega%></td>
         <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
