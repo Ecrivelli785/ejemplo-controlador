@@ -2,6 +2,8 @@
 <div class="d-flex justify-content-between mr-5 ml-2">
   <div class="ml-3 mb-2"><h3>Listados de trabajos en el taller</h3></div>
   <div><h3><%= link_to 'Descargar pdf', listado_path(format: 'pdf')  %></h3></div>
+  <div><h3><%= link_to 'Descargar Excel', listado_path(format: 'xlsx')  %></h3></div>
+  <div><h3><%= link_to 'Importar Excel', orden_trabajos_imports_new_path %></h3></div>
 
 
 
