@@ -25,9 +25,9 @@
       <th>Ot</th>
       <th>Cliente</th>
       <th>Producto</th>
+      <th>Cantidad</th>
       <th>Estado actual</th>
       <th>Proceso</th>
-      <th></th>
       <th>Fecha entrega</th>
       <th>Observaciones</th>
       <th colspan="3"></th>
@@ -42,12 +42,12 @@
         <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.cliente, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.producto, orden_trabajo %></td>
+        <td><%= link_to orden_trabajo.cantidad, orden_trabajo %></td>
         <td>
         <%= f.input :estado_actual, as: :select, :collection => ["Pendiente", "Diseño Diego", "Diseño Ismael", "Diseño Eduardo", "Diseño Miguel", "Diseño Santiago", "CTP", "Impresión", "Post", "Terminado"], label: false, :default=> "Pendiente" %></td>
         <td>
-
-            <!-- Multiselect dropdown orden_trabajo.post -->
-            <script type="text/javascript">
+          <script>
+             //     <!-- Multiselect dropdown orden_trabajo.post -->
                 $(document).ready(function() {
                   $("#orden_trabajo_post_<%=orden_trabajo.id%>").multiselect({
                       allSelectedText: 'Showing All'
@@ -68,15 +68,7 @@
             //Fin de cambio los valores de la cadena de proceso
 
 
-            // Inicio de Date Picekr
-              $('.datepicker').datepicker({
-                format: 'mm/dd/yyyy',
-                startDate: '-3d'
-              });
-              // Fin del Date Picker
-            </script>
-
-
+          </script>
             <!-- Multiselect dropdown html -->
             <select id= "orden_trabajo_post_<%=orden_trabajo.id%>" multiple="multiple">
               <% OrdenTrabajo::POST.each do  |clave, valor| %>
@@ -90,8 +82,6 @@
             </select>
             <!-- Fin multiselect dropdown html -->
         </td>
-
-
         <%= simple_form_for (orden_trabajo), remote: true  do |f| %>
           <td><%= f.input :post, :as => :hidden, :input_html => { :id => orden_trabajo.id } %></td>
           <td><%= f.input :fecha_entrega, :class => 'datepicker', :default=>Date.today + 15.day, as: :date, html5: true ,label: false %></td>
@@ -108,3 +98,25 @@
 
 
 
+
+
+<input type="hidden" id="refresh" value="no"> <!-- Este boton escondido sirve para realizar un reload de la página-->
+
+<script>
+
+// Inicio de Date Picekr
+$('.datepicker').datepicker({
+  format: 'mm/dd/yyyy',
+  startDate: '-3d'
+});
+// Fin del Date Picker
+
+
+// Update page con reload
+  $(document).ready(function(e) {
+    var $input = $('#refresh');
+
+    $input.val() == 'yes' ? location.reload(true) : $input.val('yes');
+});
+// Fin del update
+</script>

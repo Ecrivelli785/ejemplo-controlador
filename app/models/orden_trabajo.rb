@@ -6,3 +6,4 @@ POST = { "1" => "Ko", "2" => "SM", "3" => "PM", "4" => "GTO", "5" => "Xe", "6" =
 MAQUINA = ["Ko", "SM", "PM", "GTO","Xe"]
 
 end
+
