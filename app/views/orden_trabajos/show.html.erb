@@ -25,6 +25,6 @@
   <%= @orden_trabajo.estado_actual %>
 </p>
 
-<%= link_to 'Edit', edit_orden_trabajo_path(@orden_trabajo) %> |
-<%= link_to 'Back', orden_trabajos_path %>
+<%= link_to 'Editar', edit_orden_trabajo_path(@orden_trabajo), {:class => "btn btn-primary"} %> |
+<%= link_to 'Atrás', orden_trabajos_path, {:class => "btn btn-primary"} %>
 

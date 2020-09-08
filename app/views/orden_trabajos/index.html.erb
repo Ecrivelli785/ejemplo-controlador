@@ -30,7 +30,6 @@
       <th>Proceso</th>
       <th>Fecha entrega</th>
       <th>Observaciones</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -39,9 +38,9 @@
     <% @orden_trabajos.each do |orden_trabajo| %>
     <%= simple_form_for (orden_trabajo), :input_html => { :id => "lead_form" }, remote: true  do |f| %>
       <tr>
-        <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
-        <td><%= link_to orden_trabajo.cliente, orden_trabajo %></td>
-        <td><%= link_to orden_trabajo.producto, orden_trabajo %></td>
+        <td><%= link_to "#{orden_trabajo.ot}", edit_orden_trabajo_path(orden_trabajo) %></td>
+        <td><%= link_to "#{orden_trabajo.cliente}", edit_orden_trabajo_path(orden_trabajo)%></td>
+        <td><%= link_to "#{orden_trabajo.producto}", edit_orden_trabajo_path(orden_trabajo) %></td>
         <td><%= orden_trabajo.cantidad %></td>
         <td>
         <%= f.input :estado_actual, as: :select, :collection => ["Pendiente", "Diseño Diego", "Diseño Ismael", "Diseño Eduardo", "Diseño Miguel", "Diseño Santiago", "CTP", "Impresión", "Post", "Terminado"], label: false, :default=> "Pendiente" %></td>
@@ -83,7 +82,7 @@
             <!-- Fin multiselect dropdown html -->
         </td>
 
-          <td><%= f.input :post, :as => :hidden, :input_html => { :id => orden_trabajo.id } %></td>
+          <%= f.input :post, :as => :hidden, :input_html => { :id => orden_trabajo.id } %>
           <td><%= f.input :fecha_entrega, :class => 'datepicker', :default=>Date.today + 15.day, as: :date, html5: true ,label: false %></td>
           <td><%= f.input :observaciones,  label: false %>  </td>
           <td><%= f.button :submit, name="Guardar", :class => "btn btn-primary btn-lg"%></td>
