@@ -29,11 +29,9 @@
       <th>Cliente</th>
       <th>Producto</th>
       <th>Cantidad</th>
-      <th>Post</th>
-      <th></th>
       <th>Procesos</th>
-      <th>Fecha entrega</th>
       <th>Observaciones</th>
+      <th>Fecha entrega</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -45,12 +43,10 @@
         <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.cliente, orden_trabajo %></td>
         <td><%= link_to orden_trabajo.producto, orden_trabajo %></td>
-        <td><%= link_to orden_trabajo.cantidad, orden_trabajo %></td>
+        <td><%= orden_trabajo.cantidad %></td>
         <td><%= orden_trabajo.post %></td>
-        <td><%= orden_trabajo.fecha_entrega%></td>
         <td><%= truncate(orden_trabajo.observaciones, :length => 50)%></td>
-        <td><%= link_to 'Edit', edit_orden_trabajo_path(orden_trabajo)%></td>
-        <td><%= link_to 'Destroy', orden_trabajo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= orden_trabajo.fecha_entrega%></td>
       </tr>
     <% end %>
   </tbody>
