@@ -86,7 +86,7 @@
           <td><%= f.input :post, :as => :hidden, :input_html => { :id => orden_trabajo.id } %></td>
           <td><%= f.input :fecha_entrega, :class => 'datepicker', :default=>Date.today + 15.day, as: :date, html5: true ,label: false %></td>
           <td><%= f.input :observaciones,  label: false %>  </td>
-          <td><%= f.button :submit, name="OK", :class => "btn btn-primary btn-lg"%></td>
+          <td><%= f.button :submit, name="Guardar", :class => "btn btn-primary btn-lg"%></td>
           <td><%= link_to 'Eliminar', orden_trabajo, method: :delete, data: { confirm: '¿Estás seguro/a?' } %></td>
         <% end %> <!-- Fin del simple form-->
       </tr>

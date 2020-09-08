@@ -30,12 +30,10 @@
       <th>Ot</th>
       <th>Cliente</th>
       <th>Producto</th>
-      <th>Post</th>
-      <th></th>
+      <th>Cantidad</th>
       <th>Procesos</th>
-      <th>Fecha entrega</th>
       <th>Observaciones</th>
-      <th colspan="3"></th>
+      <th>Fecha entrega</th>
     </tr>
   </thead>
 
@@ -43,12 +41,13 @@
   <tbody id="TablaOrdenesTrabajos">
     <% @orden_trabajos.each do |orden_trabajo| %>
       <tr>
-        <td><%= link_to orden_trabajo.ot %></td>
-        <td><%= link_to orden_trabajo.cliente %></td>
-        <td><%= link_to orden_trabajo.producto %></td>
+        <td><%= orden_trabajo.ot %></td>
+        <td><%= orden_trabajo.cliente %></td>
+        <td><%= orden_trabajo.producto %></td>
+        <td> <%= orden_trabajo.cantidad %> </td>
         <td><%= orden_trabajo.post %></td>
-        <td><%= orden_trabajo.fecha_entrega%></td>
         <td><%= orden_trabajo.observaciones%></td>
+        <td><%= orden_trabajo.fecha_entrega%></td>
       </tr>
     <% end %>
   </tbody>
