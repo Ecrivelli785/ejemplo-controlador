@@ -21,11 +21,13 @@ class OrdenTrabajosController < ApplicationController
       format.html # index.html.erb
       format.js # index.js.erb
       format.json { render json: @orden_trabajos}
+      
       format.xlsx {
         response.headers[
           'Content-Disposition'
         ] = "attachment; filename = Listado_ordenes_trabajo.xlsx"
       }
+      
       format.pdf do
         render pdf: 'listado/pdf', pdf: 'Listado',
         :orientation => 'landscape'
@@ -142,6 +144,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def orden_trabajo_params
-      params.require(:orden_trabajo).permit(:cliente, :producto, :ot, :fecha_entrega, :observaciones, :post, :maquina)
+      params.require(:orden_trabajo).permit(:cliente, :producto, :ot, :fecha_entrega, :observaciones, :post, :estado_actual)
     end
 end
