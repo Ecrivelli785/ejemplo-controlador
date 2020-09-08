@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: 'orden_trabajos#index'
   resources :orden_trabajos
 
+  resources :orden_trabajos_imports, only: [:new, :create]
+  get 'orden_trabajos_imports/new'
+  get 'orden_trabajos_imports/create'
 
 
 # Rutas creadas para cada pantalla
@@ -16,8 +19,6 @@ Rails.application.routes.draw do
     get 'post5', to: 'orden_trabajos#post5', as: :post5
     get 'post6', to: 'orden_trabajos#post6', as: :post6
     get 'post7', to: 'orden_trabajos#post7', as: :post7
-
-
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
