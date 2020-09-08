@@ -10,57 +10,57 @@
     <%= f.input :producto%>
     <%= f.input :cantidad%>
 
-
-
     <div>
-            <!-- Multiselect orden_trabajo.post -->
-            <script type="text/javascript">
-                $(document).ready(function() {
-                  $("#orden_trabajo_p_<%=orden_trabajo.id%>").multiselect({
-                      includeSelectAllOption: true,
-                      allSelectedText: 'Showing All'
-                  });
-                });
-                $(function () {
-                  $("#orden_trabajo_p_<%=orden_trabajo.id%>").change(function () {
-                    var selectedValue = $(this).val();
-                    console.log(selectedValue);
-                    agregarelemento(selectedValue);
-                  });
-                });
-                function agregarelemento(valor) {
-                    var my_prueba = valor.toString();
-                    $(document).ready(function(){$("#vpost").val(my_prueba);
-                    });
-                };
-            </script>
+      <!-- Multiselect dropdown orden_trabajo.post -->
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $("#orden_trabajo_post_<%=orden_trabajo.id%>").multiselect({
+            allSelectedText: 'Showing All'
+          });
+        });
+      //Fin del efecto multiselect orden_trabajo.post
 
+      //Cambia los valores de la cadena de proceso
+      $(function () {
 
+        $("#orden_trabajo_post_<%=orden_trabajo.id%>").change(function () {
+          var ValorSeleccionadoDropdown = $(this).val();
+          document.getElementById("MuestraProcesoPost_<%=orden_trabajo.id%>").innerHTML = ValorSeleccionadoDropdown;
+          $(document).ready(function(){$("#<%=orden_trabajo.id%>").val(ValorSeleccionadoDropdown)});
+        });
+      });
 
-            <select id= "orden_trabajo_p_<%=orden_trabajo.id%>" multiple="multiple">
-              <% OrdenTrabajo::POST.each do |elemento_post| %>
-                <%if cadenatovector(orden_trabajo.post).include?  elemento_post %>
-                    <option value = <%= elemento_post %> selected><%= elemento_post %></option>
+      //Fin de cambio los valores de la cadena de proceso
+      function almacenar_valores(ValorSeleccionadoDropdown){
+        var orden_trabajo_postanterior =  document.getElementById("MuestraProcesoPost_<%=orden_trabajo.id%>");
+        console.log(orden_trabajo_postanterior);
+      }
+
+      // Inicio de Date Picekr
+      $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
+      });
+     // Fin del Date Picker
+    </script>
+    <select id= "orden_trabajo_post_<%=orden_trabajo.id%>" multiple="multiple">
+      <% OrdenTrabajo::POST.each do  |clave, valor| %>
+
+                  <%if valor == cadenatohash(orden_trabajo.post)[clave] %>
+                    <option id=<%clave%> value = <%= cadenatohash(orden_trabajo.post)[clave] %> selected><%= cadenatohash(orden_trabajo.post)[clave] %></option>
                   <%else%>
-                    <option value = <%= elemento_post %> ><%= elemento_post %></option>
+                    <option id=<%clave%> value = <%= valor %> ><%= valor %></option>
                   <%end%>
               <%end%>
             </select>
 
-          <%= f.input :post, :as => :hidden, :input_html => { :id => "vpost" } %>
+          <%= f.input :post, :input_html => { :id => orden_trabajo.id} %>
+          <p id="MuestraProcesoPost_<%=orden_trabajo.id%>"></p>
 
     </div>
   </div>
-<div >
-  <%= f.button :submit, name="Confirmar", :class => "btn btn-success"%></div>
+<div>
+  <%= f.button :submit, name="Confirmar", :class => "btn btn-success"%>
 </div>
 <% end %>
 
-
-<script>
-
-$('.datepicker').datepicker({
-    format: 'mm/dd/yyyy',
-    startDate: '-3d'
-});
-</script>

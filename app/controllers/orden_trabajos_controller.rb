@@ -21,10 +21,18 @@ class OrdenTrabajosController < ApplicationController
       format.html # index.html.erb
       format.js # index.js.erb
       format.json { render json: @orden_trabajos}
-       format.pdf do
+      
+      format.xlsx {
+        response.headers[
+          'Content-Disposition'
+        ] = "attachment; filename = Listado_ordenes_trabajo.xlsx"
+      }
+      
+      format.pdf do
         render pdf: 'listado/pdf', pdf: 'Listado',
         :orientation => 'landscape'
       end
+      
     end
   end
 
@@ -127,8 +135,6 @@ def post7
    @orden_trabajos = OrdenTrabajo.all.order('fecha_entrega ASC')
 end
 # ------------------------------------------------------------------------
-
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
