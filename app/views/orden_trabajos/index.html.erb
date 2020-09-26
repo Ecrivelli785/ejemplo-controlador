@@ -38,14 +38,27 @@
     <% @orden_trabajos.each do |orden_trabajo| %>
     <%= simple_form_for (orden_trabajo), :input_html => { :id => "lead_form" }, remote: true  do |f| %>
       <tr>
-        <td><%= link_to "#{orden_trabajo.ot}", edit_orden_trabajo_path(orden_trabajo) %></td>
+        <td><%= link_to orden_trabajo.ot, orden_trabajo %></td>
         <td><%= link_to "#{orden_trabajo.cliente}", edit_orden_trabajo_path(orden_trabajo)%></td>
         <td><%= link_to "#{orden_trabajo.producto}", edit_orden_trabajo_path(orden_trabajo) %></td>
         <td><%= orden_trabajo.cantidad %></td>
+
+
+
         <td>
-        <%= f.input :estado_actual, as: :select, :collection => ["Pendiente", "Diseño Diego", "Diseño Ismael", "Diseño Eduardo", "Diseño Miguel", "Diseño Santiago", "CTP", "Impresión", "Post", "Terminado"], label: false, :default=> "Pendiente" %></td>
+        <%= f.input :estado_actual, as: :select, :collection => ["Pendiente", "Diseño Diego", "Diseño Ismael", "Diseño Eduardo", "Diseño Miguel", "Diseño Santiago", "CTP", "Impresión", "Post", "Terminado"], :input_html => { :onclick => "customFunction()"}, label: false, :default=> "Pendiente" %></td>
         <td>
           <script>
+
+function customFunction(){//you call that function according to requirement
+ setTimeout(function(){
+  submitForm();
+ },5000);
+}
+function submitForm(){
+document.getElementByID('formId').submit();
+}
+
              //     <!-- Multiselect dropdown orden_trabajo.post -->
                 $(document).ready(function() {
                   $("#orden_trabajo_post_<%=orden_trabajo.id%>").multiselect({
@@ -71,11 +84,10 @@
             <!-- Multiselect dropdown html -->
             <select id= "orden_trabajo_post_<%=orden_trabajo.id%>" multiple="multiple">
               <% OrdenTrabajo::POST.each do  |clave, valor| %>
-
                   <%if valor == cadenatohash(orden_trabajo.post)[clave] %>
                     <option value = <%= cadenatohash(orden_trabajo.post)[clave] %> selected><%= cadenatohash(orden_trabajo.post)[clave] %></option>
                   <%else%>
-                    <option value = <%= valor %> ><%= valor %></option>
+                    <option value=<%= valor %>><%= valor %></option>
                   <%end%>
               <%end%>
             </select>
@@ -83,10 +95,10 @@
         </td>
 
           <%= f.input :post, :as => :hidden, :input_html => { :id => orden_trabajo.id } %>
-          <td><%= f.input :fecha_entrega, :class => 'datepicker', :default=>Date.today + 15.day, as: :date, html5: true ,label: false %></td>
+          <td><%= f.input :fecha_entrega, :class => 'datepicker', as: :date, html5: true ,label: false %></td>
           <td><%= f.input :observaciones,  label: false %>  </td>
-          <td><%= f.button :submit, name="Guardar", :class => "btn btn-primary btn-lg"%></td>
-          <td><%= link_to 'Eliminar', orden_trabajo, method: :delete, data: { confirm: '¿Estás seguro/a?' } %></td>
+          <td><%= f.button :submit, name="Guardar", :class => "checkbox-inline"%></td>
+          <td><%= link_to 'Eliminar', method: :delete, data: { confirm: '¿Estás seguro/a?' } %></td>
         <% end %> <!-- Fin del simple form-->
       </tr>
 
